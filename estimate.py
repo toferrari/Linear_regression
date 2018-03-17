@@ -8,9 +8,9 @@ while km <= 0:
 	try:
 		km = int(input("Quel est votre nombre de km ?\n"))
 		if km <= 0:
-			print("Please choose a positive number")
+			print("Merci de saisir un chiffre posotif")
 	except:
-		print("Please use a number")
+		print("Merci de mettre un nombre")
 		continue
 theta = list()
 try:

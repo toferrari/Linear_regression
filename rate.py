@@ -1,6 +1,7 @@
 #!/usr/bin/python3.4
 
 import csv
+import sys
 import matplotlib.pyplot as plt
 
 def check_list(km, price, m):
@@ -55,14 +56,14 @@ def learnningRate(m):
 	return (0.01)
 
 def file_thetha(theta0, theta1):
-	print estimate(theta0, theta1, 42000)
 	fthetha = open("theta.csv", "w")
 	fthetha.write(str(theta0) + "," + str(theta1))
 	fthetha.close()
 
 def graph(km, price, theta0, theta1):
 	plt.plot([km],[price], 'ro', markersize=4)
-	plt.plot([estimate(theta0, theta1, x) for x in range(250000)], "b", linewidth=3)
+	plt.plot([estimate(theta0, theta1, x) for x in range(250000)], \
+	 												"b", linewidth=3)
 	plt.xlabel('Mileage')
 	plt.ylabel('Price')
 	plt.show()
@@ -85,15 +86,17 @@ m = len(km)
 fl_m = float(m)
 if check_list(km, price, m) == False:
 	print "error"
+	sys.exit(-1)
 theta0, theta1, i = 0.0, 0.0, 0
 nomre_km, max_km = new_grad(km, m)
 norme_price, max_price = new_grad(price, m)
 print max_km, max_price
-while i < 10000:
-	tmp_theta0 = learnningRate(fl_m) * (1 / fl_m) * (fct_thetha0(m, nomre_km, norme_price, theta0, theta1))
-	tmp_theta1 = learnningRate(fl_m) * (1 / fl_m) * (fct_thetha1(m, nomre_km, norme_price, theta0, theta1))
+for i in range(10000):
+	tmp_theta0 = learnningRate(fl_m) * (1 / fl_m) * \
+				(fct_thetha0(m, nomre_km, norme_price, theta0, theta1))
+	tmp_theta1 = learnningRate(fl_m) * (1 / fl_m) * \
+				(fct_thetha1(m, nomre_km, norme_price, theta0, theta1))
 	theta0 = theta0 - tmp_theta0
 	theta1 = theta1 - tmp_theta1
-	i += 1
 file_thetha(theta0 * max_price , theta1 * max_price / max_km)
 graph(km, price, theta0 * max_price, theta1 * max_price / max_km)
