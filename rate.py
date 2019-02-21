@@ -1,7 +1,8 @@
-#!/usr/bin/python3.4
+#!/usr/bin/env python3
 
 import csv
 import sys
+import numpy
 import matplotlib.pyplot as plt
 
 def check_list(km, price, m):
@@ -85,12 +86,11 @@ del km[0], price[0]
 m = len(km)
 fl_m = float(m)
 if check_list(km, price, m) == False:
-	print "error"
+	print ("error")
 	sys.exit(-1)
 theta0, theta1, i = 0.0, 0.0, 0
 nomre_km, max_km = new_grad(km, m)
 norme_price, max_price = new_grad(price, m)
-print max_km, max_price
 for i in range(10000):
 	tmp_theta0 = learnningRate(fl_m) * (1 / fl_m) * \
 				(fct_thetha0(m, nomre_km, norme_price, theta0, theta1))

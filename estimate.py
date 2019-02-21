@@ -1,16 +1,16 @@
-#!/usr/bin/python3.4
+#!/usr/bin/env python3
 
 import csv
-import matplotlib.pyplot as plt
+import matplotlib as plt
 
 km = 0
 while km <= 0:
 	try:
-		km = int(input("Quel est votre nombre de km ?\n"))
+		km = int(input("Enter your Km ?\n"))
 		if km <= 0:
-			print("Merci de saisir un chiffre posotif")
+			print("Please use positive number")
 	except:
-		print("Merci de mettre un nombre")
+		print("Please use a number")
 		continue
 theta = list()
 try:
@@ -20,7 +20,8 @@ try:
 			theta.append(float(row[0]))
 			theta.append(float(row[1]))
 		except:
-			print "erreur"
+			print ("Error")
 except:
 	theta = [0,0]
-print int(float(km) * theta[1] + theta[0])
+
+print ("The estimation for", km, "km, is", int(float(km) * theta[1] + theta[0]), "$.")
