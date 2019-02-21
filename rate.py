@@ -54,7 +54,7 @@ def fct_thetha1(m ,km, price, theta0, theta1):
 	return ret
 
 def learnningRate(m):
-	return (0.01)
+	return (0.1)
 
 def file_thetha(theta0, theta1):
 	fthetha = open("theta.csv", "w")
@@ -68,6 +68,13 @@ def graph(km, price, theta0, theta1):
 	plt.xlabel('Mileage')
 	plt.ylabel('Price')
 	plt.show()
+
+def cost(m ,km, price, theta0, theta1):
+	ret = 0.0
+	for i in range(m):
+		ret += (estimate(theta0, theta1, km[i]) - price[i])**2
+	ret = ret/(2*m)
+	return ret
 
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #				Programme
@@ -91,7 +98,7 @@ if check_list(km, price, m) == False:
 theta0, theta1, i = 0.0, 0.0, 0
 nomre_km, max_km = new_grad(km, m)
 norme_price, max_price = new_grad(price, m)
-for i in range(10000):
+while (cost(m, nomre_km, norme_price, theta0, theta1)> 0.0032475):
 	tmp_theta0 = learnningRate(fl_m) * (1 / fl_m) * \
 				(fct_thetha0(m, nomre_km, norme_price, theta0, theta1))
 	tmp_theta1 = learnningRate(fl_m) * (1 / fl_m) * \
