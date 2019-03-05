@@ -80,7 +80,11 @@ def cost(m ,km, price, theta0, theta1):
 #				Programme
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-data = csv.reader(open("data.csv", "r"))
+try:
+	data = csv.reader(open("data.csv", "r"))
+except:
+	print ("Error file")
+	exit()
 km, price = list(), list()
 for row in data:
 	try:
